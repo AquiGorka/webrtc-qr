@@ -6,7 +6,8 @@
   "dependencies": {
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
-    "react-scripts": "2.0.4"
+    "react-scripts": "2.0.4",
+    "simple-peer": "^9.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
