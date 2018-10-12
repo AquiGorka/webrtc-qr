@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
+import { P2PProvider } from './components/P2P'
 
 class App extends Component {
   render() {
-    return <div>React QR Share</div>
+    return <P2PProvider>React QR Share</P2PProvider>
   }
 }
 
