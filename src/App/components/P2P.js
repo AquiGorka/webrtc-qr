@@ -11,6 +11,7 @@ class P2PProvider extends Component {
     connected: false,
     hosting: false,
     joining: false,
+    latestWebrtcData: null,
   }
 
   render() {
@@ -29,13 +30,14 @@ class P2PProvider extends Component {
     )
   }
 
-  connect = data => {
+  connect = qrcodeData => {
     const { peer } = this.state
     peer.on('connect', () => {
       console.log('Host connected')
       this.setState({ connected: true })
     })
-    peer.signal(data)
+    peer.on('data', data => this.setState({latestWebrtcData: data}))
+    peer.signal(qrcodeData)
   }
 
   guest = () => {
@@ -43,18 +45,26 @@ class P2PProvider extends Component {
   }
 
   host = () => {
-    const peer = new Peer({ initiator: true, trickle: false })
+    const peer = new Peer({
+      initiator: true,
+      trickle: false,
+      objectMode: true,
+    })
     peer.on('signal', offer => this.setState({ offer }))
     this.setState({ peer, hosting: true })
   }
 
   join = data => {
-    const peer = new Peer({ trickle: false })
+    const peer = new Peer({
+      trickle: false,
+      objectMode: true,
+    })
     peer.on('signal', answer => this.setState({ answer }))
     peer.on('connect', () => {
       console.log('Guest connected')
       this.setState({ connected: true })
     })
+    peer.on('data', data => this.setState({latestWebrtcData: data}))
     peer.signal(data)
     this.setState({ peer })
   }
