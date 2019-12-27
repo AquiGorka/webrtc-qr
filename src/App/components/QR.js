@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import encode from 'qr-encode'
 import QrR from 'react-qr-reader'
 import GIF from './Gif'
@@ -13,7 +13,16 @@ class Reader extends Component {
 
   render() {
     return (
-      <div>
+      <Fragment>
+        <p>
+          Received {
+            this.state.total
+            ? Array.from(Array(this.state.total).keys()).map(
+              (i) => i in this.state.segments ? '█' : '▁'
+            ).join('')
+            : "nothing so far."
+          }
+        </p>
         <QrR
           style={{
             opacity: 0.1,
@@ -29,16 +38,7 @@ class Reader extends Component {
           onScan={this.handleData}
           onError={error => console.log('--> Error: ', error)}
         />
-        <p>
-          Received {
-            this.state.total
-            ? Array.from(Array(this.state.total).keys()).map(
-              (i) => i in this.state.segments ? '█' : '▁'
-            ).join('')
-            : "nothing so far."
-          }
-        </p>
-      </div>
+      </Fragment>
     )
   }
 

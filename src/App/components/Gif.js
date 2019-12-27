@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 
 const INTERVAL = 200
 
@@ -28,7 +28,13 @@ class GIF extends Component {
     const { index } = this.state
 
     return (
-      <div>
+      <Fragment>
+        <p>
+          Sending {
+            Array.from(images.keys()).map(
+              (i) => i === index ? '█' : '▁'
+            ).join('')}
+        </p>
         <img
           key={index}
           src={images[index]}
@@ -41,13 +47,7 @@ class GIF extends Component {
             boxSizing: 'border-box',
           }}
         />
-        <p>
-          Sending {
-            Array.from(images.keys()).map(
-              (i) => i === index ? '█' : '▁'
-            ).join('')}
-        </p>
-      </div>
+      </Fragment>
     )
   }
 }

@@ -15,9 +15,9 @@ export default () => (
 
       return (
         <Fragment>
-          {offer && <Encoder data={offer} />}
           {hosting && <Reader onData={data => connect(data)} />}
           {!hosting && <button onClick={host}>Host</button>}
+          {offer && <Encoder data={offer} />}
         </Fragment>
       )
     }}
