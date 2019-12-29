@@ -23,3 +23,12 @@ npm start
 ```sh
 npm build
 ```
+
+## Contributors
+
+<table>
+  <tr>
+    <td align="center"><a href="http://AquiGorka.com"><img src="https://avatars3.githubusercontent.com/u/3072458?v=4" width="75px;" alt=""/><br /><sub><b>Gorka Ludlow</b></sub></a><br /><a href="https://github.com/AquiGorka/webrtc-qr/commits?author=AquiGorka" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/alsuren"><img src="https://avatars3.githubusercontent.com/u/254647?s=460&v=4" width="75px;" alt=""/><br /><sub><b>David Laban</b></sub></a><br /><a href="https://github.com/AquiGorka/webrtc-qr/commits?author=alsuren" title="Code">💻</a></td>
+  </tr>
+</table>
