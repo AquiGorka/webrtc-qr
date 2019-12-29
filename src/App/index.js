@@ -3,14 +3,17 @@ import { P2PProvider } from './components/P2P'
 import Host from './components/Host'
 import Guest from './components/Guest'
 import Chime from './components/Chime'
+import { LastDataProvider } from './components/LastData'
 
 class App extends Component {
   render() {
     return (
       <P2PProvider>
-        <Host />
-        <Guest />
-        <Chime />
+        <LastDataProvider>
+          <Host />
+          <Guest />
+          <Chime />
+        </LastDataProvider>
       </P2PProvider>
     )
   }

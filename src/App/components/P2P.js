@@ -11,7 +11,6 @@ class P2PProvider extends Component {
     connected: false,
     hosting: false,
     joining: false,
-    latestWebrtcData: null,
   }
 
   render() {
@@ -36,7 +35,6 @@ class P2PProvider extends Component {
       console.log('Host connected')
       this.setState({ connected: true })
     })
-    peer.on('data', data => this.setState({latestWebrtcData: data}))
     peer.signal(qrcodeData)
   }
 
@@ -64,7 +62,6 @@ class P2PProvider extends Component {
       console.log('Guest connected')
       this.setState({ connected: true })
     })
-    peer.on('data', data => this.setState({latestWebrtcData: data}))
     peer.signal(data)
     this.setState({ peer })
   }
@@ -72,4 +69,4 @@ class P2PProvider extends Component {
 
 const P2PConsumer = P2PContext.Consumer
 
-export { P2PProvider, P2PConsumer }
+export { P2PContext, P2PProvider, P2PConsumer }
