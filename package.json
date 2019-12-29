@@ -1,7 +1,7 @@
 {
   "name": "webrtc-connect-experiment",
   "author": "Gorka",
-  "homepage": "https://alsuren.github.io/webrtc-qr",
+  "homepage": "https://webrtc-qr.surge.sh/",
   "license": "MIT",
   "version": "0.1.0",
   "dependencies": {
@@ -18,8 +18,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "env PUBLIC_URL=/webrtc-qr react-scripts build && gh-pages -d build && rm -r build"
   },
   "eslintConfig": {
     "extends": "react-app"
