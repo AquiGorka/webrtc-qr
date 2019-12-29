@@ -1,7 +1,7 @@
 {
   "name": "webrtc-connect-experiment",
   "author": "Gorka",
-  "homepage": "https://webrtc-qr.surge.sh/",
+  "homepage": "https://aquigorka.com/webrtc-qr/",
   "license": "MIT",
   "version": "0.1.0",
   "dependencies": {
