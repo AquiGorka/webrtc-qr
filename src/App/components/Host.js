@@ -1,23 +1,33 @@
 import React, { Fragment } from 'react'
 import { P2PConsumer } from './P2P'
 import { Encoder, Reader } from './QR'
+import { TextBox } from './TextBox'
+import { LastDataConsumer } from './LastData'
 
 export default () => (
   <P2PConsumer>
-    {({ host, connect, offer, hosting, joining, connected }) => {
+    {({ host, connect, offer, hosting, joining, connected, peer }) => {
       if (joining) {
         return null
       }
 
       if (connected) {
-        return <div>Host connected</div>
+        return <div>
+          <p>Host connected.</p>
+          <TextBox peer={peer}/>
+          <p>
+            <LastDataConsumer>
+              {({latestWebrtcData}) => latestWebrtcData}
+            </LastDataConsumer>
+          </p>
+        </div>
       }
 
       return (
         <Fragment>
-          {offer && <Encoder data={offer} />}
           {hosting && <Reader onData={data => connect(data)} />}
           {!hosting && <button onClick={host}>Host</button>}
+          {offer && <Encoder data={offer} />}
         </Fragment>
       )
     }}

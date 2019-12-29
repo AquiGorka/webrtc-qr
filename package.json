@@ -1,21 +1,24 @@
 {
   "name": "webrtc-connect-experiment",
   "author": "Gorka",
+  "homepage": "https://webrtc-qr.surge.sh/",
   "license": "MIT",
   "version": "0.1.0",
   "dependencies": {
     "qr-encode": "^0.3.0",
-    "react": "^16.5.2",
-    "react-dom": "^16.5.2",
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0",
     "react-qr-reader": "^2.1.1",
     "react-scripts": "2.0.4",
-    "simple-peer": "^9.1.2"
+    "simple-peer": "^9.1.2",
+    "use-debounce": "^3.3.0"
   },
   "scripts": {
     "start": "HTTPS=true react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "env PUBLIC_URL=/webrtc-qr react-scripts build && gh-pages -d build && rm -r build"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -25,5 +28,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "gh-pages": "^2.1.1"
+  }
 }

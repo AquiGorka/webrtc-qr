@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import encode from 'qr-encode'
 import QrR from 'react-qr-reader'
 import GIF from './Gif'
@@ -6,28 +6,48 @@ import GIF from './Gif'
 const OPTIONS = { type: 10, size: 6, level: 'H' }
 const SIZE = 40
 
+export const progressBar = ({segments, total}) =>
+  `${
+    Array.from(Array(total).keys()).map(
+      (i) => i in segments ? '█' : '▁'
+    ).join('')
+  } ${
+    (
+      Object.keys(segments).length / total
+    ).toLocaleString(undefined, {style: 'percent'})
+  }`
+
 class Reader extends Component {
-  state = { data: null, segments: new Set(), sent: false }
+  state = { data: null, segments: {}, total: 0, sent: false }
 
   componentDidMount() {}
 
   render() {
     return (
-      <QrR
-        style={{
-          opacity: 0.1,
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          bottom: 0,
-          right: 0,
-        }}
-        delay={10}
-        _facingMode="user"
-        showViewFinder={false}
-        onScan={this.handleData}
-        onError={error => console.log('--> Error: ', error)}
-      />
+      <Fragment>
+        <p>
+          Received {
+            this.state.total
+            ? progressBar(this.state)
+            : "nothing so far."
+          }
+        </p>
+        <QrR
+          style={{
+            opacity: 0.1,
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            bottom: 0,
+            right: 0,
+          }}
+          delay={10}
+          _facingMode="user"
+          showViewFinder={false}
+          onScan={this.handleData}
+          onError={error => console.log('--> Error: ', error)}
+        />
+      </Fragment>
     )
   }
 
@@ -35,11 +55,15 @@ class Reader extends Component {
     if (data) {
       const { segments, sent } = this.state
       const parsed = JSON.parse(data)
-      this.setState({ segments: segments.add(data) })
-      if (parsed.t === segments.size && !sent) {
+      if (!segments[parsed.i]){
+        this.setState({
+          segments: {...segments, [parsed.i]: parsed},
+          total: parsed.t,
+        })
+      }
+      if (parsed.t === Object.keys(segments).length && !sent) {
         this.setState({ sent: true })
-        const raw = Array.from(segments)
-          .map(s => JSON.parse(s))
+        const raw = Object.values(segments)
           .sort((a, b) => a.i - b.i)
           .map(x => x.s)
           .join('')
