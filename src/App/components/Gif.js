@@ -31,9 +31,10 @@ class GIF extends Component {
       <Fragment>
         <p>
           Sending {
-            Array.from(images.keys()).map(
-              (i) => i === index ? '█' : '▁'
-            ).join('')}
+            images.map(
+              (_, i) => i === index ? '█' : '▁'
+            ).join('')
+          }
         </p>
         <img
           key={index}

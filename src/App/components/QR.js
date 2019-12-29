@@ -6,6 +6,17 @@ import GIF from './Gif'
 const OPTIONS = { type: 10, size: 6, level: 'H' }
 const SIZE = 40
 
+export const progressBar = ({segments, total}) =>
+  `${
+    Array.from(Array(total).keys()).map(
+      (i) => i in segments ? '█' : '▁'
+    ).join('')
+  } ${
+    (
+      Object.keys(segments).length / total
+    ).toLocaleString(undefined, {style: 'percent'})
+  }`
+
 class Reader extends Component {
   state = { data: null, segments: {}, total: 0, sent: false }
 
@@ -17,9 +28,7 @@ class Reader extends Component {
         <p>
           Received {
             this.state.total
-            ? Array.from(Array(this.state.total).keys()).map(
-              (i) => i in this.state.segments ? '█' : '▁'
-            ).join('')
+            ? progressBar(this.state)
             : "nothing so far."
           }
         </p>
