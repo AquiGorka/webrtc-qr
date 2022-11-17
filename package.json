@@ -9,7 +9,7 @@
     "react": "^16.8.0",
     "react-dom": "^16.8.0",
     "react-qr-reader": "^2.1.1",
-    "react-scripts": "2.0.4",
+    "react-scripts": "5.0.1",
     "simple-peer": "^9.1.2",
     "use-debounce": "^3.3.0"
   },
